@@ -42,6 +42,11 @@ class OrderDomain:
         order_collection.delete_one({'_id': order_id})
         logger.info('Order deleted: %s', order_id)
 
+    @staticmethod
+    def delete_all() -> None:
+        order_collection.delete_many({})
+        logger.info('All Orders deleted')
+
     @classmethod
     def from_dict(cls, order_doc: dict) -> 'OrderDomain':
         return cls(order_id=order_doc['_id'], total=order_doc['total'], created_at=order_doc['created_at'])

@@ -2,3 +2,4 @@ pymongo~=4.11.1
 fastapi~=0.115.9
 pydantic~=2.10.6
 uvicorn~=0.34.0
+coloredlogs~=15.0.1

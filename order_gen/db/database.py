@@ -1,8 +1,9 @@
 from pymongo import MongoClient, ASCENDING
 
 from order_gen import config
+from order_gen.modules import logger
 
-print('connecting to database...')
+logger.info('connecting to database...')
 client = MongoClient(config.DATABASE_URL)
 
 order_db = client[config.DATABASE_NAME]
@@ -11,7 +12,7 @@ order_collection = order_db[config.ORDER_COLLECTION_NAME]
 
 
 def ensure_indexes():
-    print('ensuring indexes...')
+    logger.info('ensuring indexes...')
     order_collection.create_index([('created_at', ASCENDING)])
 
 

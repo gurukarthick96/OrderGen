@@ -1,6 +1,7 @@
 import uvicorn
 
 from order_gen import app
+from order_gen.modules import logger
 
 host = '127.0.0.1'
 port = 8000
@@ -14,11 +15,11 @@ if __name__ == '__main__':
     reload = not is_production
 
     try:
-        print('starting app...')
+        logger.info('starting app...')
         uvicorn.run(order_gen_app, host=host, port=port, reload=reload, workers=1)
 
     except Exception as e:
-        print(f'caught error: {e}')
+        logger.error('caught error', e)
 
     finally:
-        print('exiting app...')
+        logger.info('exiting app...')

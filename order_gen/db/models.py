@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 
 from order_gen.db.database import order_collection
+from order_gen.modules import logger
 
 
 class OrderDomain:
@@ -17,13 +18,13 @@ class OrderDomain:
     def save(self) -> str:
         order_doc = self.to_dict()
         order_collection.insert_one(order_doc)
-        print('Order inserted:', order_doc)
+        logger.info('Order inserted: %s', order_doc)
         return self.id
 
     def update(self) -> str:
         order_doc = self.to_dict()
         order_collection.update_one({'_id': self.id}, {'$set': order_doc})
-        print('Order updated:', order_doc)
+        logger.info('Order updated: %s', order_doc)
         return self.id
 
     @staticmethod
@@ -39,7 +40,7 @@ class OrderDomain:
     @staticmethod
     def delete(order_id) -> None:
         order_collection.delete_one({'_id': order_id})
-        print('Order deleted:', order_id)
+        logger.info('Order deleted: %s', order_id)
 
     @classmethod
     def from_dict(cls, order_doc: dict) -> 'OrderDomain':

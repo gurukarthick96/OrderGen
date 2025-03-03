@@ -27,15 +27,15 @@ class Order(BaseModel):
 
 
 class GenRequest(BaseModel):
-    created_range: tuple[datetime, datetime] = Field(..., description="order created date in range (from, to)")
-    total_range: tuple[float, float] = Field(..., description="order total amount in range (min, max)")
+    created_range: tuple[datetime, datetime] = Field(..., description='order created date in range (from, to)')
+    total_range: tuple[float, float] = Field(..., description='order total amount in range (min, max)')
     num_of_orders: int
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         if self.created_range[0] > self.created_range[1]:
-            raise ValueError("created_range min must be less than or equals to max")
+            raise ValueError('created_range min must be less than or equals to max')
 
         if self.total_range[0] > self.total_range[1]:
-            raise ValueError("created_range min must be less than or equals to max")
+            raise ValueError('created_range min must be less than or equals to max')

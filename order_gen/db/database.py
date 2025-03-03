@@ -3,8 +3,11 @@ from pymongo import MongoClient, ASCENDING
 from order_gen import config
 from order_gen.modules import logger
 
+# from motor.motor_asyncio import AsyncIOMotorClient
+
 logger.info('connecting to database...')
 client = MongoClient(config.DATABASE_URL)
+# client = AsyncIOMotorClient(config.DATABASE_URL)
 
 order_db = client[config.DATABASE_NAME]
 

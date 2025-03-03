@@ -4,7 +4,7 @@ from order_gen.db import OrderDomain
 
 def create_order(order: Order) -> Order:
     order_domain = order.to_domain()
-    order_domain.save()
+    order_domain.insert()
 
     return Order.from_domain(order_domain)
 

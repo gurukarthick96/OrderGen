@@ -3,17 +3,17 @@ import sys
 
 import coloredlogs
 
-LOG_FORMAT = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
+from order_gen import config
 
 logging.basicConfig(
-    level=logging.INFO,
-    format=LOG_FORMAT,
+    level=config.LOGGING_LEVEL,
+    format=config.LOGGING_FORMAT,
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('app.log')
+        logging.FileHandler(config.LOGGING_FILE)
     ]
 )
 
-logger = logging.getLogger('OrderGen-App')
+logger = logging.getLogger(config.SERVICE_NAME)
 
-coloredlogs.install(logger=logger, fmt=LOG_FORMAT)
+coloredlogs.install(logger=logger, fmt=config.LOGGING_FORMAT)

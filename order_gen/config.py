@@ -1,21 +1,21 @@
-ENVIRONMENT = 'local'
-# ENVIRONMENT = 'development'
-# ENVIRONMENT = 'production'
+from order_gen.env import get_env
 
-SERVICE_NAME = 'OrderGen-App'
-BASE_PATH = '/order-gen-app'
+ENVIRONMENT = get_env('ENVIRONMENT')
 
-SERVER_HOST = '127.0.0.1'
-SERVER_PORT = 8000
-SERVER_RELOAD = False
-SERVER_MAX_WORKERS = 1
+SERVICE_NAME = get_env('SERVICE_NAME', 'OrderGen-App')
+BASE_PATH = get_env('BASE_PATH', '/order-gen-app')
 
-LOGGING_LEVEL = 'INFO'
+SERVER_HOST = get_env('SERVER_HOST')
+SERVER_PORT = get_env('SERVER_PORT', required_type=int)
+SERVER_RELOAD = get_env('SERVER_RELOAD', False, required_type=bool)
+SERVER_MAX_WORKERS = get_env('SERVER_MAX_WORKERS', 1, required_type=int)
+
+LOGGING_LEVEL = get_env('LOGGING_LEVEL', 'INFO')
 LOGGING_FORMAT = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
 
-DATABASE_URL = 'mongodb+srv://rguest-buy-devint:KuCye7rLGTty@rguest-buy-dev-emgsw.azure.mongodb.net/test?authSource=admin&replicaSet=rGuest-Buy-Dev-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true'
-DATABASE_NAME = 'rGuestBuyOrder-Devint'
-ORDER_COLLECTION_NAME = 'AI_Order'
+DATABASE_URL = get_env('DATABASE_URL')
+DATABASE_NAME = get_env('DATABASE_NAME')
+ORDER_COLLECTION_NAME = get_env('ORDER_COLLECTION_NAME', 'AI_Order')
 
-GEN_ORDERS_BATCH_SIZE = 1000
-EXECUTOR_MAX_WORKERS = 5
+GEN_ORDERS_BATCH_SIZE = get_env('GEN_ORDERS_BATCH_SIZE', 1000, required_type=int)
+EXECUTOR_MAX_WORKERS = get_env('EXECUTOR_MAX_WORKERS', 5, required_type=int)

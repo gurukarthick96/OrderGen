@@ -12,7 +12,6 @@ SERVER_MAX_WORKERS = 1
 
 LOGGING_LEVEL = 'INFO'
 LOGGING_FORMAT = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
-LOGGING_FILE = 'app.log'
 
 DATABASE_URL = 'mongodb+srv://rguest-buy-devint:KuCye7rLGTty@rguest-buy-dev-emgsw.azure.mongodb.net/test?authSource=admin&replicaSet=rGuest-Buy-Dev-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true'
 DATABASE_NAME = 'rGuestBuyOrder-Devint'

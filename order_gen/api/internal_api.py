@@ -23,10 +23,10 @@ async def check_database():
         return False
 
 
-@router.get("/health")
+@router.get('/health')
 async def health_check(db: bool = Depends(check_database)):
     return {
-        "healthy": True if db else False,
-        "database": db,
+        'healthy': True if db else False,
+        'database': db,
         'hostname': socket.gethostname(),
     }

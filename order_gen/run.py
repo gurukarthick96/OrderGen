@@ -12,7 +12,8 @@ def run_locally():
             host=config.SERVER_HOST,
             port=config.SERVER_PORT,
             reload=config.SERVER_RELOAD,
-            workers=config.SERVER_MAX_WORKERS
+            workers=config.SERVER_MAX_WORKERS,
+            log_config=None
         )
 
     except:

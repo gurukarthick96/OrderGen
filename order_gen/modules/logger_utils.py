@@ -25,7 +25,9 @@ def get_global_logger():
 def get_additional_loggers() -> list[logging.Logger]:
     return [
         get_customized_logger('uvicorn.access', 'Uvicorn-Api'),
-        get_customized_logger('uvicorn.error', 'Uvicorn-Server')
+        get_customized_logger('uvicorn.error', 'Uvicorn-Server'),
+        get_customized_logger('gunicorn.access', 'Gunicorn-Api'),
+        get_customized_logger('gunicorn.error', 'Gunicorn-Server')
     ]
 
 

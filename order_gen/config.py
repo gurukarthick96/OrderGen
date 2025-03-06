@@ -11,7 +11,7 @@ SERVER_RELOAD = get_env('SERVER_RELOAD', False, required_type=bool)
 SERVER_MAX_WORKERS = get_env('SERVER_MAX_WORKERS', 1, required_type=int)
 
 LOGGING_LEVEL = get_env('LOGGING_LEVEL', 'INFO')
-LOGGING_FORMAT = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
+LOGGING_FORMAT = '%(asctime)s %(levelname)s %(name)s %(filename)s:%(lineno)d -- %(message)s'
 
 DATABASE_URL = get_env('DATABASE_URL')
 DATABASE_NAME = get_env('DATABASE_NAME')

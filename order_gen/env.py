@@ -15,9 +15,9 @@ def get_env(key: str, default=None, required_type: type = str):
         return val
 
     if required_type == bool:
-        return val.lower() in ("true", "1", "yes", "on")
+        return val.lower() in ('true', '1', 'yes', 'on')
     elif required_type == list:
-        return val.split(",")
+        return val.split(',')
 
     try:
         return required_type(val)

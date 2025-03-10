@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 'order-gen-app'
+  namespace: 'agys-buy'
+  labels:
+    app: 'order-gen-app'
+    service: 'order-gen-app'
+spec:
+  selector:
+    app: 'order-gen-app'
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'order-gen-app'
+  namespace: 'agys-buy'
+  labels:
+    app: 'order-gen-app'
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 'order-gen-app'
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: 'order-gen-app'
+        version: v1
+    spec:
+      nodeSelector:
+        nodepool: buydevint
+      topologySpreadConstraints:
+        - maxSkew: 3
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: 'order-gen-app'
+      containers:
+        - name: 'order-gen-app'
+          image: 'agysacrqa.azurecr.io/buy-order-gen-app:latest'
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          resources:
+            limits:
+              cpu: '1m'
+              memory: '250Mi'
+          livenessProbe:
+            httpGet:
+              path: /order-gen-app/internal/ping
+              port: 8000
+            initialDelaySeconds: 60
+            failureThreshold: 2
+            periodSeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /order-gen-app/internal/health
+              port: 8000
+            failureThreshold: 60
+            periodSeconds: 10
+            timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /order-gen-app/internal/health
+              port: 8000
+            failureThreshold: 60
+            periodSeconds: 10
+            timeoutSeconds: 10
+          envFrom:
+            - configMapRef:
+                name: buy-order-gen-app-configmap

@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ingress-buy-order-gen-app
+spec:
+  hosts:
+    - aks-buy-devint.hospitalityrevolution.com
+    - aks-buy-devint.rguest.internal
+  gateways:
+    - buy-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /order-gen-app
+      route:
+        - destination:
+            host: order-gen-app.agys-buy.svc.cluster.local
+            port:
+              number: 8000

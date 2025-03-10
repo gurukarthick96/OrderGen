@@ -3,13 +3,15 @@ import asyncio
 import order_gen.config as config
 from order_gen.api import GenRequest
 from order_gen.db import OrderDomain
-from order_gen.modules import executor, random_price, random_datetime
+from order_gen.modules import executor, random_price, random_datetime, logger
 
 batch_size = config.GEN_ORDERS_BATCH_SIZE
 
 
 def generate_orders(gen_request: GenRequest) -> None:
     asyncio.run(_generate_orders_async(gen_request))
+
+    logger.info('total number of order(s) generated: %d', gen_request.num_of_orders)
 
 
 def _generate_orders_single_batch(gen_request: GenRequest) -> None:
@@ -61,4 +63,6 @@ def __generate_random_order(gen_request: GenRequest) -> OrderDomain:
 
 
 def wipe_orders() -> None:
+    logger.info('estimated number of order(s) before wipeout: %d', OrderDomain.estimated_count())
+
     OrderDomain.delete_all()

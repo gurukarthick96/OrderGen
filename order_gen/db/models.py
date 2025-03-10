@@ -55,6 +55,10 @@ class OrderDomain:
         order_collection.delete_many({})
         logger.info('All Orders deleted')
 
+    @staticmethod
+    def estimated_count() -> int:
+        return order_collection.estimated_document_count()
+
     @classmethod
     def from_dict(cls, order_doc: dict) -> 'OrderDomain':
         return cls(order_id=order_doc['_id'], total=order_doc['total'], created_at=order_doc['created_at'])

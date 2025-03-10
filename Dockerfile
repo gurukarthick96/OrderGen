@@ -5,6 +5,9 @@ ENV APP_HOME=/mine/app
 ENV APP_HOST=0.0.0.0
 ENV APP_PORT=8000
 
+# Install curl and clean up to reduce image size
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Set the working directory
 WORKDIR $APP_HOME
 

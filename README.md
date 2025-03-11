@@ -55,6 +55,6 @@ OrderGen App has two major router endpoints (functionalities), one is order CRUD
 * kubectl apply -f azure-pipelines\k8s.service.yaml
 
 #### Undeploy
-* kubectl delete -f azure-pipelines\k8s.service.configMap.yaml
-* kubectl delete -f azure-pipelines\k8s.service.virtualService.yaml
 * kubectl delete -f azure-pipelines\k8s.service.yaml
+* kubectl delete -f azure-pipelines\k8s.service.virtualService.yaml
+* kubectl delete -f azure-pipelines\k8s.service.configMap.yaml
